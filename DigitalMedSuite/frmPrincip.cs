@@ -64,5 +64,12 @@ namespace DigitalMedSuite
         {
 
         }
+
+        private void btn2_Click(object sender, EventArgs e)
+        {
+            frmVerExpedientes expedientes = new frmVerExpedientes();
+            expedientes.Show();
+            this.Hide();
+        }
     }
 }

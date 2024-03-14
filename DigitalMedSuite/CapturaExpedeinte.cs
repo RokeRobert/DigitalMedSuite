@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -198,20 +199,21 @@ namespace ProyectoAdmin
             double AlturaT, PesoT;
             int EdadT=ObtenerEdad();
             string NombreT;
-            Datos.Sexo[Datos.i] = InsertadoDeInformacionString(cobSexo.Text);
+            string Sexo, Nombres,Telefono,TelefonoEmerg,Correo,TipoSangre,ActivoSex,Alergias,Adicciones,ETS,HistQuirurgico,AnteFam,NumExp;
+            Sexo = InsertadoDeInformacionString(cobSexo.Text);
             NombreT=String.Concat(txtNombre.Text,txtApellidoP.Text,txtApellidoM.Text);
-            Datos.Nombre[Datos.i]= InsertadoDeInformacionString(NombreT);
-            Datos.Telefono[Datos.i] = InsertadoDeInformacionString(txtTelefono.Text);
-            Datos.TelefonoEmerg[Datos.i] = InsertadoDeInformacionString(txtTelefonoEmergencia.Text);
-            Datos.CorreoE[Datos.i] = InsertadoDeInformacionString(txtCorreoE.Text);
-            Datos.TipoDeSangre[Datos.i] = InsertadoDeInformacionString(cobTipodeSangre.Text);
-            Datos.SexualActivo[Datos.i] = InsertadoDeInformacionString(cobSexActivo.Text);
-            Datos.Alergias[Datos.i] = InsertadoDeInformacionString(txtAlergias.Text);
-            Datos.Adicciones[Datos.i] = InsertadoDeInformacionString(txtAdicciones.Text);
-            Datos.ETS[Datos.i] = InsertadoDeInformacionString(txtETS.Text);
-            Datos.HistQuirugico[Datos.i] = InsertadoDeInformacionString(txtHistQuirugico.Text);
-            Datos.AnteFam[Datos.i] = InsertadoDeInformacionString(txtAnteFam.Text);
-            Datos.NumeroDeExpediente[Datos.i] = GenerarNumeroDeExpediente();
+            Nombres= InsertadoDeInformacionString(NombreT);
+            Telefono = InsertadoDeInformacionString(txtTelefono.Text);
+            TelefonoEmerg = InsertadoDeInformacionString(txtTelefonoEmergencia.Text);
+            Correo = InsertadoDeInformacionString(txtCorreoE.Text);
+            TipoSangre = InsertadoDeInformacionString(cobTipodeSangre.Text);
+            ActivoSex = InsertadoDeInformacionString(cobSexActivo.Text);
+            Alergias= InsertadoDeInformacionString(txtAlergias.Text);
+            Adicciones = InsertadoDeInformacionString(txtAdicciones.Text);
+            ETS= InsertadoDeInformacionString(txtETS.Text);
+            HistQuirurgico = InsertadoDeInformacionString(txtHistQuirugico.Text);
+            AnteFam = InsertadoDeInformacionString(txtAnteFam.Text);
+            NumExp = GenerarNumeroDeExpediente();
             try
             {
                 AlturaT = double.Parse(txtAltura.Text);
@@ -221,6 +223,21 @@ namespace ProyectoAdmin
                 Datos.Edad[Datos.i]=EdadT;
                 Datos.Peso[Datos.i]=int.Parse(txtPeso.Text);
                 Datos.Altura[Datos.i]=double.Parse(txtAltura.Text);
+
+                TextWriter expediente = new StreamWriter("C:\\Users\\roker\\source\\repos\\DigitalMedSuite_Diseños\\DigitalMedSuite\\bin\\Debug\\Expedientes\\" + NumExp +" - "+NombreT+ ".txt");
+                expediente.WriteLine(Nombres);
+                expediente.WriteLine(Telefono);
+                expediente.WriteLine(TelefonoEmerg);
+                expediente.WriteLine(Correo);
+                expediente.WriteLine(TipoSangre);
+                expediente.WriteLine(ActivoSex);
+                expediente.WriteLine(Alergias);
+                expediente.WriteLine(Adicciones);
+                expediente.WriteLine(ETS);
+                expediente.WriteLine(HistQuirurgico);
+                expediente.WriteLine(AnteFam);
+                expediente.WriteLine(NumExp);
+                expediente.Close();
             }
             catch(FormatException)
             {
